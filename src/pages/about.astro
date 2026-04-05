@@ -1,0 +1,100 @@
+---
+import Base from "../layouts/Base.astro";
+const site = Astro.locals.site as "geekmac" | "geekpc";
+const title = site === "geekpc"
+	? "About Josh Pirtle | Senior Technology Advocate in Idyllwild"
+	: "About Josh Pirtle | Tech Support in Idyllwild, CA";
+---
+
+<Base title={title} description="22+ years of patient, judgment-free tech help. Apple & Windows certified. AI Generalist (AIG-17). Serving Idyllwild, Hemet, San Diego.">
+	<section class="page-header">
+		<div class="container">
+			<p class="section__eyebrow">Meet Your Tech Expert</p>
+			<h1 class="page-header__title">22+ Years Helping Real People With Technology</h1>
+			<p class="page-header__desc">Patient, judgment-free guidance from someone who actually speaks plain English.</p>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<div class="about-content">
+				<div class="about-image">
+					<img src="/img/hero.jpg" alt="Josh Pirtle" width="300" height="375" loading="lazy" />
+				</div>
+				<div class="about-text">
+					<h2>From Turtle Computer Works to MyGeekMac</h2>
+					<p>I started helping people with computers in 2002 under the name Turtle Computer Works. Back then, "tech support" meant showing up with a bag of cables and a lot of patience.</p>
+					<p>Over two decades, the technology changed dramatically. The patience? That stayed exactly the same.</p>
+					<p>Today I serve Idyllwild, Pine Cove, Mountain Center, Hemet, San Jacinto, Anza, San Diego, and clients nationwide via remote support. Whether you need help with your Mac, your PC, or understanding what AI can actually do for you — I'm here to help in plain English.</p>
+
+					<h2>What I Do Differently</h2>
+					<p>Most tech people talk over your head. I translate tech into plain English and teach at the pace humans learn. No jargon, no judgment — just patient guidance that actually sticks.</p>
+					<p>My NSCC training taught me that if a student doesn't understand, that's the instructor's problem to solve — not the student's fault. I bring that same approach to every tech session.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section--alt">
+		<div class="container">
+			<h2 class="section__title section__title--centered">Background & Credentials</h2>
+
+			<div class="aig-badge">
+				<div class="aig-badge__circle">AIG</div>
+				<div>
+					<p class="aig-badge__title">AI Generalist Fellowship — AIG-17</p>
+					<p class="aig-badge__org">Outskill (formerly GrowthSchool) — Certified AI Generalist</p>
+					<p style="opacity:0.85;font-size:0.9rem;margin-bottom:0.25rem;">5 Levels: Prompt Engineering · RAGs & Voice Agents · Image & Video Gen · Automations & AI Agents · No-Code Product Dev</p>
+					<p class="aig-badge__id">Credential ID: a993c4f9-170b-4893-b354-b6de90fe52b0</p>
+					<a href="/cert/ai-generalist-fellowship.pdf" class="aig-badge__link" target="_blank">Download Certificate PDF →</a>
+				</div>
+			</div>
+
+			<div class="credentials-grid">
+				<div>
+					<h3 style="font-family:var(--font-display);margin-bottom:var(--space-sm);">Experience</h3>
+					<ul class="credential-list">
+						<li><strong>2002–Present:</strong> Independent technology consultant</li>
+						<li><strong>22+ years</strong> supporting seniors and small businesses</li>
+						<li><strong>NSCC Division Officer:</strong> U.S. Naval Sea Cadet Corps</li>
+						<li><strong>Apple & Windows certified</strong></li>
+						<li><strong>AI Generalist (AIG-17)</strong> — Outskill Fellowship</li>
+						<li><strong>Formerly Turtle Computer Works</strong> (est. 2002)</li>
+					</ul>
+				</div>
+				<div>
+					<h3 style="font-family:var(--font-display);margin-bottom:var(--space-sm);">Specializations</h3>
+					<ul class="credential-list">
+						<li>Senior technology advocacy & education</li>
+						<li>AI workflow automation & consulting</li>
+						<li>Mac & PC repair and troubleshooting</li>
+						<li>Home and business networking</li>
+						<li>Scam prevention & digital security</li>
+						<li>Remote support (nationwide)</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<h2 class="section__title section__title--centered">Community Roots</h2>
+			<div style="max-width:650px;margin:0 auto;">
+				<p style="color:var(--warm-gray);margin-bottom:var(--space-md);">I live in Idyllwild, California — a small mountain community where neighbors still wave at each other. I believe in the power of local community, the importance of patience, and the value of doing things right.</p>
+				<p style="color:var(--warm-gray);">As a Division Officer in the U.S. Naval Sea Cadet Corps, I train young leaders in discipline, communication, and character. Those same values — Honor, Respect, Commitment — shape how I approach every technology session.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="cta-section">
+		<div class="container">
+			<div class="cta-content">
+				<h2 class="cta-title">Let's Talk</h2>
+				<p class="cta-desc">Ready for patient, jargon-free tech help?</p>
+				<a href="tel:+19514685674" class="cta-phone" style="display:block;margin-bottom:var(--space-md);">(951) 468-5674</a>
+				<a href="/contact" class="btn btn--primary btn--large">Schedule a Consultation</a>
+			</div>
+		</div>
+	</section>
+</Base>

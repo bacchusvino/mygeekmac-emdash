@@ -1,0 +1,57 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../../layouts/Base.astro";
+
+const { entries: posts, cacheHint } = await getEmDashCollection("posts", {
+	status: "published",
+	sort: { field: "published_date", order: "desc" },
+});
+
+try { Astro.cache.set(cacheHint); } catch {}
+---
+
+<Base title="Blog | Tech Tips & Local News" description="Tech tips, scam alerts, AI guides, and local Idyllwild tech news from Josh Pirtle.">
+	<section class="page-header">
+		<div class="container">
+			<p class="section__eyebrow">Blog</p>
+			<h1 class="page-header__title">Tech Tips & Local News</h1>
+			<p class="page-header__desc">Practical advice from 22+ years of helping real people with technology.</p>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			{posts && posts.length > 0 ? (
+				<div class="blog-grid">
+					{posts.map((post) => (
+						<a href={`/blog/${post.id}`} class="blog-card" style="text-decoration:none;color:inherit;">
+							<div class="blog-card__body">
+								{post.data.published_date && (
+									<p class="blog-card__date">
+										{new Date(post.data.published_date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+									</p>
+								)}
+								<h2 class="blog-card__title">{post.data.title}</h2>
+								{post.data.excerpt && <p class="blog-card__excerpt">{post.data.excerpt}</p>}
+							</div>
+						</a>
+					))}
+				</div>
+			) : (
+				<div style="text-align:center;padding:var(--space-xl) 0;">
+					<p style="color:var(--warm-gray);">Blog posts coming soon. Check back!</p>
+				</div>
+			)}
+		</div>
+	</section>
+
+	<section class="cta-section">
+		<div class="container">
+			<div class="cta-content">
+				<h2 class="cta-title">Have a Tech Question?</h2>
+				<p class="cta-desc">Call Josh — real answers, no jargon.</p>
+				<a href="tel:+19514685674" class="cta-phone" style="display:block;margin-bottom:var(--space-md);">(951) 468-5674</a>
+			</div>
+		</div>
+	</section>
+</Base>

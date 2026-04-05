@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mygeekmac.com/sitemap-index.xml
+Sitemap: https://mygeekpc.com/sitemap-index.xml

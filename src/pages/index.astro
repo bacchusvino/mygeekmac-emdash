@@ -1,51 +1,285 @@
 ---
-import { getEmDashEntry } from "emdash";
 import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "home");
+const site = Astro.locals.site as "geekmac" | "geekpc";
 
-try {
-	Astro.cache.set(cacheHint);
-} catch {}
+const geekMacSchema = {
+	"@context": "https://schema.org",
+	"@type": "LocalBusiness",
+	"name": "MyGeekMac",
+	"image": "https://mygeekmac.com/img/hero.jpg",
+	"description": "Patient, judgment-free tech support for seniors and small businesses. Mac & PC repair, AI consulting, and tech coaching in Idyllwild, CA.",
+	"@id": "https://mygeekmac.com",
+	"url": "https://mygeekmac.com",
+	"telephone": "+1-951-468-5674",
+	"email": "josh@mygeekmac.com",
+	"address": { "@type": "PostalAddress", "addressLocality": "Idyllwild", "addressRegion": "CA", "postalCode": "92549", "addressCountry": "US" },
+	"geo": { "@type": "GeoCoordinates", "latitude": 33.7408, "longitude": -116.7139 },
+	"areaServed": [
+		{"@type": "City", "name": "Idyllwild"}, {"@type": "City", "name": "Pine Cove"},
+		{"@type": "City", "name": "Mountain Center"}, {"@type": "City", "name": "Hemet"},
+		{"@type": "City", "name": "San Jacinto"}, {"@type": "City", "name": "Anza"},
+		{"@type": "City", "name": "San Diego"}
+	],
+	"priceRange": "$$",
+	"openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "17:00" },
+	"founder": { "@type": "Person", "name": "Josh Pirtle" },
+	"foundingDate": "2002",
+	"aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "5", "bestRating": "5" },
+	"sameAs": ["https://g.page/r/CYkr2-fy_M9qEAI", "https://www.linkedin.com/in/joscha-pirtle-9446a19"]
+};
 
-const pageTitle = page?.data.title;
-const pageContent = page?.data.content;
+const geekPCSchema = {
+	...geekMacSchema,
+	"name": "MyGeekPC",
+	"description": "Senior technology advocate. Patient tech help that saves you money and keeps you safe. Idyllwild, Pine Cove, San Diego.",
+	"@id": "https://mygeekpc.com",
+	"url": "https://mygeekpc.com",
+};
+
+const schema = site === "geekpc" ? geekPCSchema : geekMacSchema;
+const title = site === "geekpc"
+	? "Senior Technology Advocate | Idyllwild & San Diego"
+	: "Computer Repair & Tech Support in Idyllwild, CA";
+const desc = site === "geekpc"
+	? "Tech help that saves you money & keeps you safe. Patient, judgment-free senior tech support in Idyllwild, Pine Cove & San Diego."
+	: "Patient, judgment-free tech help for seniors and small businesses. Mac & PC repair, AI consulting, tech coaching. Serving Idyllwild, Hemet, San Diego & beyond.";
 ---
 
-<Base
-	title={pageTitle !== "Home" ? pageTitle : undefined}
-	description="Build products people actually want. The all-in-one platform for modern teams."
->
-	{
-		pageContent ? (
-			<MarketingBlocks value={pageContent} />
-		) : (
-			<div class="empty-state">
-				<h1>Welcome to Acme</h1>
-				<p>Edit the home page content in the admin to get started.</p>
-				<a href="/_emdash/admin" class="btn btn-primary">
-					Open Admin
-				</a>
+<Base title={title} description={desc} jsonLd={schema}>
+	{site === "geekmac" ? (
+		<!-- MyGeekMac Homepage -->
+		<section class="hero-photo">
+			<div class="container">
+				<div class="hero-photo__image">
+					<img src="/img/hero.jpg" alt="Josh Pirtle" width="280" height="280" />
+				</div>
+				<p class="hero-photo__eyebrow">Tech Help Made Human</p>
+				<h1 class="hero-photo__title">Computer Repair & Tech Support in Idyllwild, CA</h1>
+				<p class="hero-photo__desc">I Make Technology Work for Normal People.</p>
+				<p class="hero-photo__location">Serving Idyllwild, Hemet, San Diego & surrounding areas</p>
+				<p class="hero-photo__legacy"><em>Formerly Turtle Computer Works</em> — Same trusted service since 2002</p>
+				<div class="mt-lg" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+					<a href="tel:+19514685674" class="btn btn--primary btn--large">(951) 468-5674</a>
+					<a href="/contact" class="btn btn--secondary btn--large">Get Help</a>
+				</div>
 			</div>
-		)
-	}
+		</section>
+
+		<section class="section--alt">
+			<div class="container">
+				<h2 class="section__title section__title--centered">Simple, human-first technology support</h2>
+				<div class="service-cards">
+					<div class="service-card">
+						<div class="service-card__icon">🖥️</div>
+						<h3 class="service-card__title">Computer Help for Real People</h3>
+						<p class="service-card__desc">Email, devices, hacked accounts, backups, printers, networking.</p>
+					</div>
+					<div class="service-card">
+						<div class="service-card__icon">✨</div>
+						<h3 class="service-card__title">AI for Everyday Life</h3>
+						<p class="service-card__desc">Tools, organization, writing help, personal automations.</p>
+					</div>
+					<div class="service-card">
+						<div class="service-card__icon">📚</div>
+						<h3 class="service-card__title">Coaching & Classes</h3>
+						<p class="service-card__desc">Patient, step-by-step tech teaching.</p>
+					</div>
+				</div>
+				<p class="text-center mt-lg">
+					<a href="/services" class="btn btn--primary">View All Services & Pricing</a>
+				</p>
+			</div>
+		</section>
+
+		<section>
+			<div class="container">
+				<div class="about-snippet">
+					<div class="about-snippet__badge">
+						<span class="badge-initials">JP</span>
+						<span class="badge-years">23+</span>
+						<span class="badge-label">Years Experience</span>
+					</div>
+					<div class="about-snippet__content">
+						<p class="section__eyebrow">About</p>
+						<h2 class="section__title">Hi, I'm Josh.</h2>
+						<p>I've spent 23 years helping real people feel less stressed around technology.</p>
+						<p>I translate tech into plain English and teach at the pace humans learn. No jargon, no judgment — just patient guidance that actually sticks.</p>
+						<div class="about-tags">
+							<span class="about-tag">💻 Mac & PC Expert</span>
+							<span class="about-tag">🤖 AI-Assisted Solutions</span>
+							<span class="about-tag">👤 Senior-Friendly</span>
+						</div>
+						<a href="/about" class="btn btn--ghost">Read My Full Story →</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section--alt">
+			<div class="container">
+				<div style="text-align:center;margin-bottom:var(--space-lg);">
+					<p class="section__eyebrow">
+						<a href="https://g.page/r/CYkr2-fy_M9qEAI/review" target="_blank" rel="noopener" class="google-rating">
+							5.0 <span class="stars">★★★★★</span> on Google
+						</a>
+					</p>
+					<h2 class="section__title">What Clients Say</h2>
+				</div>
+				<div class="reviews-grid">
+					<blockquote class="review-card">
+						<p class="review-card__text">"Josh is the best IT guy I have ever been helped by, don't have a computer without having Josh to back you up."</p>
+						<footer class="review-card__author"><strong>Phil Thompson</strong><span class="review-card__stars">★★★★★</span></footer>
+					</blockquote>
+					<blockquote class="review-card">
+						<p class="review-card__text">"Josh is incredibly knowledgeable and he always solves my problems! He understands my limitations and is very patient with me!"</p>
+						<footer class="review-card__author"><strong>Mary</strong><span class="review-card__stars">★★★★★</span></footer>
+					</blockquote>
+					<blockquote class="review-card">
+						<p class="review-card__text">"I appreciate all of the help and trying to be available when I have problems and helping to solve them."</p>
+						<footer class="review-card__author"><strong>Marci Puetz</strong><span class="review-card__stars">★★★★★</span></footer>
+					</blockquote>
+				</div>
+				<p class="text-center mt-lg">
+					<a href="https://g.page/r/CYkr2-fy_M9qEAI/review" class="btn btn--secondary" target="_blank" rel="noopener">Read All Reviews on Google →</a>
+				</p>
+			</div>
+		</section>
+
+		<section>
+			<div class="container">
+				<h2 class="section__title section__title--centered">Support that fits real life</h2>
+				<div class="benefits-grid">
+					<div class="benefit"><div class="benefit__icon">♡</div><h3 class="benefit__title">Patient & Clear</h3><p class="benefit__desc">I never rush. Every question is valid, and I'll explain things as many times as needed until it clicks.</p></div>
+					<div class="benefit"><div class="benefit__icon">💬</div><h3 class="benefit__title">No Tech Jargon</h3><p class="benefit__desc">Plain English only. I translate complicated tech speak into words that actually make sense.</p></div>
+					<div class="benefit"><div class="benefit__icon">🕐</div><h3 class="benefit__title">Your Schedule</h3><p class="benefit__desc">Flexible hours. I come to you — home, office, or wherever you need help.</p></div>
+					<div class="benefit"><div class="benefit__icon">🛡️</div><h3 class="benefit__title">Trustworthy</h3><p class="benefit__desc">Your privacy and security come first. I treat your devices and data with the respect they deserve.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="cta-section">
+			<div class="container">
+				<div class="cta-content">
+					<h2 class="cta-title">Let's Talk</h2>
+					<p class="cta-desc">Call, email, or schedule a free consultation.</p>
+					<div class="cta-contact">
+						<a href="tel:+19514685674" class="cta-phone">(951) 468-5674</a>
+						<a href="mailto:josh@mygeekmac.com" class="cta-email">josh@mygeekmac.com</a>
+					</div>
+					<a href="/contact" class="btn btn--primary btn--large">Schedule a Consultation</a>
+				</div>
+			</div>
+		</section>
+	) : (
+		<!-- MyGeekPC Homepage -->
+		<section class="hero-photo">
+			<div class="container">
+				<p class="hero-photo__eyebrow">Senior Technology Advocate</p>
+				<h1 class="hero-photo__title">Tech Help That Saves You Money & Keeps You Safe</h1>
+				<p class="hero-photo__desc">Patient, judgment-free tech support for seniors and families.</p>
+				<p class="hero-photo__location">Idyllwild · Pine Cove · San Diego</p>
+				<div class="mt-lg" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+					<a href="tel:+19514685674" class="btn btn--primary btn--large">Call Josh Now: (951) 468-5674</a>
+				</div>
+				<div class="trust-items" style="margin-top:var(--space-md);">
+					<span class="trust-item">🏠 In-Home & Remote</span>
+					<span class="trust-item">🛡️ Scam Recovery</span>
+					<span class="trust-item">❤️ No Judgment</span>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="container" style="text-align:center;padding:var(--space-lg) var(--space-md);">
+				<h2 class="section__title">"I Write the Letters to the Banks for You"</h2>
+				<p style="max-width:600px;margin:0 auto;color:var(--warm-gray);">When technology problems cost you money — unauthorized charges, billing errors, account issues — I don't just fix the tech. I write the dispute letters, make the calls, and advocate on your behalf until it's resolved.</p>
+			</div>
+		</section>
+
+		<section class="section--alt">
+			<div class="container">
+				<h2 class="section__title section__title--centered">How I Help</h2>
+				<div class="service-cards">
+					<div class="service-card">
+						<div class="service-card__icon">💰</div>
+						<h3 class="service-card__title">Save Money</h3>
+						<p class="service-card__desc">Life Alert → Apple Watch. Cut cable bills. Free security cameras. I find the savings.</p>
+					</div>
+					<div class="service-card">
+						<div class="service-card__icon">🛡️</div>
+						<h3 class="service-card__title">Stay Safe</h3>
+						<p class="service-card__desc">Scam recognition, password security, bank dispute letters. Protection you can trust.</p>
+					</div>
+					<div class="service-card">
+						<div class="service-card__icon">🔧</div>
+						<h3 class="service-card__title">Get Unstuck</h3>
+						<p class="service-card__desc">Bluetooth, printers, TV issues, general frustration fixes. I make it work.</p>
+					</div>
+				</div>
+				<p class="text-center mt-lg"><a href="/services" class="btn btn--primary">View All Services</a></p>
+			</div>
+		</section>
+
+		<section>
+			<div class="container" style="text-align:center;">
+				<p class="section__eyebrow">Have Your Own Personal Geek</p>
+				<h2 class="section__title">Membership Plans</h2>
+				<p style="color:var(--warm-gray);max-width:500px;margin:0 auto var(--space-lg);">Monthly tech support starting at just $25/month. Priority service, unlimited questions, peace of mind.</p>
+				<div class="membership-grid">
+					<div class="membership-card">
+						<h3 class="membership-card__name">Geek Access</h3>
+						<p class="membership-card__price">$25<span class="membership-card__period">/mo</span></p>
+						<p class="membership-card__desc">Unlimited remote support</p>
+						<a href="/membership" class="btn btn--secondary">Learn More</a>
+					</div>
+					<div class="membership-card membership-card--featured">
+						<h3 class="membership-card__name">My Personal Geek</h3>
+						<p class="membership-card__price">$50<span class="membership-card__period">/mo</span></p>
+						<p class="membership-card__desc">Includes in-home visits</p>
+						<a href="/membership" class="btn btn--primary">Most Popular</a>
+					</div>
+					<div class="membership-card">
+						<h3 class="membership-card__name">Geek Pro</h3>
+						<p class="membership-card__price">$99<span class="membership-card__period">/mo</span></p>
+						<p class="membership-card__desc">Full concierge service</p>
+						<a href="/membership" class="btn btn--secondary">Learn More</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section--alt">
+			<div class="container">
+				<div style="text-align:center;margin-bottom:var(--space-lg);">
+					<h2 class="section__title">What Clients Say</h2>
+				</div>
+				<div class="reviews-grid">
+					<blockquote class="review-card">
+						<p class="review-card__text">"Josh is incredibly patient and knowledgeable. He never makes me feel dumb for asking questions."</p>
+						<footer class="review-card__author"><strong>Barbara M. — Idyllwild</strong><span class="review-card__stars">★★★★★</span></footer>
+					</blockquote>
+					<blockquote class="review-card">
+						<p class="review-card__text">"He helped me avoid a phone scam and secured all my accounts. Peace of mind is priceless."</p>
+						<footer class="review-card__author"><strong>Robert T. — Pine Cove</strong><span class="review-card__stars">★★★★★</span></footer>
+					</blockquote>
+					<blockquote class="review-card">
+						<p class="review-card__text">"Josh writes the letters to the banks for me when things go wrong. He actually advocates for me."</p>
+						<footer class="review-card__author"><strong>Carol S. — San Diego</strong><span class="review-card__stars">★★★★★</span></footer>
+					</blockquote>
+				</div>
+			</div>
+		</section>
+
+		<section class="cta-section">
+			<div class="container">
+				<div class="cta-content">
+					<h2 class="cta-title">Call Josh Now</h2>
+					<a href="tel:+19514685674" class="cta-phone">(951) 468-5674</a>
+					<p class="cta-desc">Same-day service available. Reply within 2 hours.</p>
+					<a href="/contact" class="btn btn--primary btn--large">Get Help Now</a>
+				</div>
+			</div>
+		</section>
+	)}
 </Base>
-
-<style>
-	.empty-state {
-		text-align: center;
-		padding: var(--spacing-5xl) var(--spacing-lg);
-		max-width: var(--max-width);
-		margin: 0 auto;
-	}
-
-	.empty-state h1 {
-		margin-bottom: var(--spacing-md);
-	}
-
-	.empty-state p {
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-xl);
-	}
-</style>

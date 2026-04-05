@@ -2,29 +2,43 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "mygeekmac-emdash",
 	"main": "./src/worker.ts",
-	"compatibility_date": "2026-03-29",
+	"compatibility_date": "2026-04-01",
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "mygeekmac-emdash-db",
-			// Run `wrangler d1 create my-marketing-site` and paste the ID here
-		},
+			"database_name": "mygeekmac-emdash-db"
+			// Run `wrangler d1 create mygeekmac-emdash-db` and paste the database_id here
+		}
 	],
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",
-			"bucket_name": "mygeekmac-media",
+			"bucket_name": "mygeekmac-media"
+		}
+	],
+	"vars": {
+		"SITE_URL_GEEKMAC": "https://mygeekmac.com",
+		"SITE_URL_GEEKPC": "https://mygeekpc.com"
+	},
+	"routes": [
+		{
+			"pattern": "mygeekmac.com/*",
+			"zone_name": "mygeekmac.com"
 		},
+		{
+			"pattern": "mygeekpc.com/*",
+			"zone_name": "mygeekpc.com"
+		}
 	],
 	"observability": {
-		"enabled": true,
+		"enabled": true
 	},
 	"worker_loaders": [
 		{
-			"binding": "LOADER",
-		},
-	],
+			"binding": "LOADER"
+		}
+	]
 }

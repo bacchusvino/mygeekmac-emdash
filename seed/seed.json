@@ -2,14 +2,14 @@
 	"$schema": "https://emdashcms.com/seed.schema.json",
 	"version": "1",
 	"meta": {
-		"name": "Marketing Starter",
-		"description": "A conversion-focused marketing site with landing pages",
-		"author": "EmDash"
+		"name": "MyGeekMac + MyGeekPC",
+		"description": "Dual-domain tech support business — Idyllwild, CA",
+		"author": "Josh Pirtle"
 	},
 
 	"settings": {
-		"title": "Acme",
-		"tagline": "Build products people actually want"
+		"title": "MyGeekMac",
+		"tagline": "Technology Help for Real People"
 	},
 
 	"collections": [
@@ -19,17 +19,78 @@
 			"labelSingular": "Page",
 			"supports": ["drafts", "revisions", "seo"],
 			"fields": [
-				{
-					"slug": "title",
-					"label": "Title",
-					"type": "string",
-					"required": true
-				},
-				{
-					"slug": "content",
-					"label": "Content",
-					"type": "portableText"
-				}
+				{ "slug": "title", "label": "Title", "type": "string", "required": true },
+				{ "slug": "content", "label": "Content", "type": "portableText" },
+				{ "slug": "site", "label": "Site", "type": "string" }
+			]
+		},
+		{
+			"slug": "posts",
+			"label": "Blog Posts",
+			"labelSingular": "Post",
+			"supports": ["drafts", "revisions", "seo", "search"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true },
+				{ "slug": "excerpt", "label": "Excerpt", "type": "text" },
+				{ "slug": "content", "label": "Content", "type": "portableText" },
+				{ "slug": "featured_image", "label": "Featured Image", "type": "image" },
+				{ "slug": "published_date", "label": "Published Date", "type": "datetime" },
+				{ "slug": "category", "label": "Category", "type": "string" },
+				{ "slug": "site", "label": "Site", "type": "string" }
+			]
+		},
+		{
+			"slug": "services",
+			"label": "Services",
+			"labelSingular": "Service",
+			"supports": ["drafts"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true },
+				{ "slug": "description", "label": "Description", "type": "text" },
+				{ "slug": "icon", "label": "Icon", "type": "string" },
+				{ "slug": "price_range", "label": "Price Range", "type": "string" },
+				{ "slug": "cta_text", "label": "CTA Text", "type": "string" },
+				{ "slug": "category", "label": "Category", "type": "string" },
+				{ "slug": "site", "label": "Site", "type": "string" }
+			]
+		},
+		{
+			"slug": "testimonials",
+			"label": "Testimonials",
+			"labelSingular": "Testimonial",
+			"supports": ["drafts"],
+			"fields": [
+				{ "slug": "quote", "label": "Quote", "type": "text", "required": true },
+				{ "slug": "author_name", "label": "Author Name", "type": "string", "required": true },
+				{ "slug": "author_location", "label": "Location", "type": "string" },
+				{ "slug": "rating", "label": "Rating", "type": "number" },
+				{ "slug": "featured", "label": "Featured", "type": "boolean" },
+				{ "slug": "site", "label": "Site", "type": "string" }
+			]
+		},
+		{
+			"slug": "service_areas",
+			"label": "Service Areas",
+			"labelSingular": "Service Area",
+			"supports": [],
+			"fields": [
+				{ "slug": "name", "label": "Name", "type": "string", "required": true },
+				{ "slug": "description", "label": "Description", "type": "text" },
+				{ "slug": "area_type", "label": "Type", "type": "string" },
+				{ "slug": "site", "label": "Site", "type": "string" }
+			]
+		},
+		{
+			"slug": "membership_tiers",
+			"label": "Membership Tiers",
+			"labelSingular": "Membership Tier",
+			"supports": ["drafts"],
+			"fields": [
+				{ "slug": "name", "label": "Name", "type": "string", "required": true },
+				{ "slug": "price", "label": "Price", "type": "string", "required": true },
+				{ "slug": "description", "label": "Description", "type": "text" },
+				{ "slug": "features", "label": "Features", "type": "json" },
+				{ "slug": "cta_text", "label": "CTA Text", "type": "string" }
 			]
 		}
 	],
@@ -39,220 +100,311 @@
 			"name": "primary",
 			"label": "Primary Navigation",
 			"items": [
-				{ "type": "custom", "label": "Features", "url": "/#features" },
-				{ "type": "custom", "label": "Pricing", "url": "/pricing" },
+				{ "type": "custom", "label": "Services", "url": "/services" },
+				{ "type": "custom", "label": "About", "url": "/about" },
+				{ "type": "custom", "label": "Blog", "url": "/blog/" },
 				{ "type": "custom", "label": "Contact", "url": "/contact" }
 			]
 		}
 	],
 
 	"content": {
-		"pages": [
+		"posts": [
 			{
-				"id": "home",
-				"slug": "home",
+				"id": "buy-your-computer-now",
+				"slug": "buy-your-computer-now",
 				"status": "published",
 				"data": {
-					"title": "Home",
+					"title": "Buy Your Computer Now — Before Tariffs Hit",
+					"excerpt": "If you've been thinking about a new computer, now is the time. Tariffs on electronics are coming and prices will go up.",
+					"published_date": "2025-12-15T00:00:00Z",
+					"category": "tech-tips",
+					"site": "both",
 					"content": [
 						{
-							"_type": "marketing.hero",
-							"_key": "hero",
-							"headline": "Build products people actually want",
-							"subheadline": "The all-in-one platform for modern teams. Ship faster, collaborate better, and focus on what matters.",
-							"primaryCta": { "label": "Start Free Trial", "url": "/signup" },
-							"secondaryCta": { "label": "Watch Demo", "url": "/demo" }
+							"_type": "block",
+							"_key": "p1",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "If you've been putting off buying a new computer, stop waiting. Here's why: tariffs on imported electronics are coming, and when they hit, prices on laptops, desktops, and components are going to jump significantly." }]
 						},
 						{
-							"_type": "marketing.features",
-							"_key": "features",
-							"headline": "Everything you need to ship",
-							"subheadline": "Powerful features that help your team move faster without sacrificing quality.",
-							"features": [
-								{
-									"icon": "zap",
-									"title": "Lightning Fast",
-									"description": "Built for speed from the ground up. Your team will notice the difference from day one."
-								},
-								{
-									"icon": "shield",
-									"title": "Enterprise Security",
-									"description": "SOC 2 compliant with end-to-end encryption. Your data stays yours."
-								},
-								{
-									"icon": "users",
-									"title": "Team Collaboration",
-									"description": "Real-time collaboration features that make working together feel effortless."
-								},
-								{
-									"icon": "chart",
-									"title": "Powerful Analytics",
-									"description": "Understand how your team works with detailed insights and reporting."
-								},
-								{
-									"icon": "code",
-									"title": "Developer Friendly",
-									"description": "A robust API and CLI tools that integrate with your existing workflow."
-								},
-								{
-									"icon": "globe",
-									"title": "Global Scale",
-									"description": "Deployed to edge locations worldwide. Fast for everyone, everywhere."
-								}
-							]
+							"_type": "block",
+							"_key": "p2",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "I've been in this business since 2002. I've seen supply chain disruptions before — COVID chip shortages, natural disasters affecting manufacturing. Every time, the people who bought early came out ahead." }]
 						},
 						{
-							"_type": "marketing.testimonials",
-							"_key": "testimonials",
-							"headline": "Trusted by teams everywhere",
-							"testimonials": [
-								{
-									"quote": "We cut our deployment time by 80%. The team actually enjoys shipping now.",
-									"author": "Sarah Chen",
-									"role": "CTO",
-									"company": "Streamline"
-								},
-								{
-									"quote": "The best developer experience I've used. Everything just works the way you'd expect.",
-									"author": "Marcus Johnson",
-									"role": "Lead Engineer",
-									"company": "Volt Labs"
-								},
-								{
-									"quote": "Finally, a tool that doesn't get in the way. Our team is more productive than ever.",
-									"author": "Elena Rodriguez",
-									"role": "VP Engineering",
-									"company": "Nexus"
-								}
-							]
+							"_type": "block",
+							"_key": "p3",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "What to Buy Now" }]
 						},
 						{
-							"_type": "marketing.faq",
-							"_key": "faq",
-							"headline": "Frequently asked questions",
-							"items": [
-								{
-									"question": "How long does setup take?",
-									"answer": "Most teams are up and running in under 15 minutes. Our onboarding wizard guides you through connecting your existing tools and inviting your team."
-								},
-								{
-									"question": "Can I migrate from my current tool?",
-									"answer": "Yes. We have built-in importers for all major platforms, and our support team can help with custom migrations for larger teams."
-								},
-								{
-									"question": "What kind of support do you offer?",
-									"answer": "All plans include email support with a 24-hour response time. Pro and Enterprise plans include priority support with dedicated account managers."
-								},
-								{
-									"question": "Is there a free trial?",
-									"answer": "Yes, all plans come with a 14-day free trial. No credit card required. You can upgrade, downgrade, or cancel at any time."
-								}
-							]
+							"_type": "block",
+							"_key": "p4",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "If your computer is more than 5 years old, it's time. Both Mac and PC options are excellent right now. For most of my clients in Idyllwild, I recommend a MacBook Air or a mid-range Windows laptop. Both will serve you well for 5-7 years." }]
+						},
+						{
+							"_type": "block",
+							"_key": "p5",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Need help choosing? Call me at (951) 468-5674. I'll help you pick the right machine for your needs and budget — no commission, no upsell, just honest advice." }]
 						}
 					]
 				}
 			},
 			{
-				"id": "pricing",
-				"slug": "pricing",
+				"id": "why-is-internet-slow-idyllwild",
+				"slug": "why-is-internet-slow-idyllwild",
 				"status": "published",
 				"data": {
-					"title": "Pricing",
+					"title": "Why Is Internet So Slow in Idyllwild? What You Can Do About It",
+					"excerpt": "Living in Idyllwild means dealing with slow, unreliable internet. Here's why it happens and practical fixes that actually work.",
+					"published_date": "2026-03-20T00:00:00Z",
+					"category": "local-tech",
+					"site": "both",
 					"content": [
 						{
-							"_type": "marketing.hero",
-							"_key": "pricing-hero",
-							"headline": "Simple, transparent pricing",
-							"subheadline": "No hidden fees. No surprises. Start free and scale as you grow.",
-							"centered": true
+							"_type": "block",
+							"_key": "p1",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "If you live in Idyllwild, Pine Cove, or Mountain Center, you already know: the internet up here is painfully slow. Streaming buffers. Video calls freeze. Downloads crawl. Let's talk about why — and what you can actually do about it." }]
 						},
 						{
-							"_type": "marketing.pricing",
-							"_key": "pricing-plans",
-							"plans": [
-								{
-									"name": "Starter",
-									"price": "$0",
-									"period": "/month",
-									"description": "Perfect for trying things out",
-									"features": [
-										"Up to 3 team members",
-										"5 projects",
-										"Basic analytics",
-										"Community support",
-										"1GB storage"
-									],
-									"cta": { "label": "Get Started", "url": "/signup" }
-								},
-								{
-									"name": "Pro",
-									"price": "$29",
-									"period": "/user/month",
-									"description": "For growing teams",
-									"features": [
-										"Unlimited team members",
-										"Unlimited projects",
-										"Advanced analytics",
-										"Priority support",
-										"100GB storage",
-										"Custom integrations",
-										"API access"
-									],
-									"cta": { "label": "Start Free Trial", "url": "/signup?plan=pro" },
-									"highlighted": true
-								},
-								{
-									"name": "Enterprise",
-									"price": "Custom",
-									"description": "For large organizations",
-									"features": [
-										"Everything in Pro",
-										"Dedicated support",
-										"Custom contracts",
-										"SLA guarantee",
-										"Unlimited storage"
-									],
-									"cta": { "label": "Contact Sales", "url": "/contact" }
-								}
-							]
+							"_type": "block",
+							"_key": "p2",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Why Mountain Internet Is Different" }]
 						},
 						{
-							"_type": "marketing.faq",
-							"_key": "pricing-faq",
-							"headline": "Pricing FAQ",
-							"items": [
-								{
-									"question": "Can I change plans later?",
-									"answer": "Yes, you can upgrade or downgrade at any time. Changes take effect immediately and we'll prorate your billing."
-								},
-								{
-									"question": "What payment methods do you accept?",
-									"answer": "We accept all major credit cards, and Enterprise customers can pay via invoice with NET 30 terms."
-								},
-								{
-									"question": "Is there a discount for annual billing?",
-									"answer": "Yes, annual plans receive a 20% discount compared to monthly billing."
-								}
-							]
+							"_type": "block",
+							"_key": "p3",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Most of Idyllwild relies on DSL or fixed wireless. We don't have fiber optic cables running up the hill. The terrain makes cell towers less effective. And when the weather hits — snow, wind, storms — connections get even worse." }]
+						},
+						{
+							"_type": "block",
+							"_key": "p4",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Practical Fixes That Actually Work" }]
+						},
+						{
+							"_type": "block",
+							"_key": "p5",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "1. Upgrade your router. If it's more than 3 years old, a modern Wi-Fi 6 router can make a real difference. 2. Check your placement — routers work best in central locations, not tucked in a closet. 3. Consider a mesh system for larger homes. 4. Look into Starlink — it's now available in our area and offers speeds that blow DSL away." }]
+						},
+						{
+							"_type": "block",
+							"_key": "p6",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "I help Idyllwild residents optimize their home networks every week. If you're frustrated with your internet, call me at (951) 468-5674. I can usually improve things significantly in a single visit." }]
 						}
 					]
 				}
 			},
 			{
-				"id": "contact",
-				"slug": "contact",
+				"id": "top-scams-targeting-seniors",
+				"slug": "top-scams-targeting-seniors-riverside-county",
 				"status": "published",
 				"data": {
-					"title": "Contact",
+					"title": "Top Scams Targeting Seniors in Riverside County (2026)",
+					"excerpt": "Scammers are getting more sophisticated. Here are the most common scams targeting seniors in our area and how to protect yourself.",
+					"published_date": "2026-03-28T00:00:00Z",
+					"category": "safety",
+					"site": "both",
 					"content": [
 						{
-							"_type": "marketing.hero",
-							"_key": "contact-hero",
-							"headline": "Get in touch",
-							"subheadline": "Have questions? Want a demo? We'd love to hear from you.",
-							"centered": true
+							"_type": "block",
+							"_key": "p1",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Every week, I get calls from clients in Idyllwild, Hemet, and San Jacinto who've received suspicious calls, emails, or texts. Scammers are getting smarter, and seniors are their primary targets. Here's what to watch for in 2026." }]
+						},
+						{
+							"_type": "block",
+							"_key": "p2",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "The 'Tech Support' Scam" }]
+						},
+						{
+							"_type": "block",
+							"_key": "p3",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "A popup appears on your screen saying your computer is infected. It shows a phone number to call. DON'T call it. This is fake. Microsoft, Apple, and Google will never show you a popup asking you to call them. Close the browser window (or restart your computer if you can't close it) and you're fine." }]
+						},
+						{
+							"_type": "block",
+							"_key": "p4",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "The 'Gift Card' Scam" }]
+						},
+						{
+							"_type": "block",
+							"_key": "p5",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "No legitimate business, government agency, or utility company will EVER ask you to pay with gift cards. If someone asks you to buy gift cards and read them the numbers — it's a scam. Period. The IRS doesn't accept iTunes cards." }]
+						},
+						{
+							"_type": "block",
+							"_key": "p6",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "If you think you've been targeted by a scam, don't feel embarrassed — these criminals are professionals. Call me at (951) 468-5674 and I'll help you secure your accounts and report the incident." }]
 						}
 					]
+				}
+			},
+			{
+				"id": "how-local-businesses-can-use-chatgpt",
+				"slug": "how-local-businesses-can-use-chatgpt",
+				"status": "published",
+				"data": {
+					"title": "How Local Businesses in Idyllwild Can Use ChatGPT (Practical Guide)",
+					"excerpt": "AI isn't just for big tech companies. Here's how small businesses in Idyllwild can use ChatGPT to save time and grow.",
+					"published_date": "2026-04-02T00:00:00Z",
+					"category": "ai",
+					"site": "both",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "p1",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "AI tools like ChatGPT aren't just for Silicon Valley. Small businesses right here in Idyllwild can use them to save hours every week. As a certified AI Generalist (AIG-17), I've been helping local businesses integrate these tools practically and safely." }]
+						},
+						{
+							"_type": "block",
+							"_key": "p2",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "5 Ways to Use ChatGPT in Your Business Today" }]
+						},
+						{
+							"_type": "block",
+							"_key": "p3",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "1. Write customer emails faster — draft responses, follow-ups, and announcements in seconds. 2. Create social media posts — describe what you want and get a week's worth of content. 3. Summarize long documents — paste in a contract or report and get the key points. 4. Generate ideas — brainstorm marketing campaigns, menu items, event themes. 5. Answer customer FAQs — build a knowledge base from your most common questions." }]
+						},
+						{
+							"_type": "block",
+							"_key": "p4",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Want to learn how AI can help your specific business? I offer one-on-one coaching sessions. Call (951) 468-5674 or visit my services page to get started." }]
+						}
+					]
+				}
+			}
+		],
+		"testimonials": [
+			{
+				"id": "phil-thompson",
+				"slug": "phil-thompson",
+				"status": "published",
+				"data": {
+					"quote": "Josh is the best IT guy I have ever been helped by, don't have a computer without having Josh to back you up.",
+					"author_name": "Phil Thompson",
+					"rating": 5,
+					"featured": true,
+					"site": "geekmac"
+				}
+			},
+			{
+				"id": "mary",
+				"slug": "mary",
+				"status": "published",
+				"data": {
+					"quote": "Josh is incredibly knowledgeable and he always solves my problems! He understands my limitations and is very patient with me!",
+					"author_name": "Mary",
+					"rating": 5,
+					"featured": true,
+					"site": "geekmac"
+				}
+			},
+			{
+				"id": "marci-puetz",
+				"slug": "marci-puetz",
+				"status": "published",
+				"data": {
+					"quote": "I appreciate all of the help and trying to be available when I have problems and helping to solve them.",
+					"author_name": "Marci Puetz",
+					"rating": 5,
+					"featured": true,
+					"site": "geekmac"
+				}
+			},
+			{
+				"id": "barbara-m",
+				"slug": "barbara-m",
+				"status": "published",
+				"data": {
+					"quote": "Josh is incredibly patient and knowledgeable. He never makes me feel dumb for asking questions. Highly recommend for anyone who needs tech help.",
+					"author_name": "Barbara M.",
+					"author_location": "Idyllwild",
+					"rating": 5,
+					"featured": true,
+					"site": "geekpc"
+				}
+			},
+			{
+				"id": "robert-t",
+				"slug": "robert-t",
+				"status": "published",
+				"data": {
+					"quote": "He helped me avoid a phone scam and secured all my accounts. Peace of mind is priceless.",
+					"author_name": "Robert T.",
+					"author_location": "Pine Cove",
+					"rating": 5,
+					"featured": true,
+					"site": "geekpc"
+				}
+			},
+			{
+				"id": "carol-s",
+				"slug": "carol-s",
+				"status": "published",
+				"data": {
+					"quote": "Josh writes the letters to the banks for me when things go wrong. He actually advocates for me. I've never had tech support like this.",
+					"author_name": "Carol S.",
+					"author_location": "San Diego",
+					"rating": 5,
+					"featured": true,
+					"site": "geekpc"
+				}
+			}
+		],
+		"membership-tiers": [
+			{
+				"id": "geek-access",
+				"slug": "geek-access",
+				"status": "published",
+				"data": {
+					"name": "Geek Access",
+					"price": "$25/mo",
+					"description": "Unlimited remote support and priority scheduling",
+					"features": ["Unlimited remote support calls", "Priority scheduling", "Monthly device check-up", "Scam alert notifications", "Email support"],
+					"cta_text": "Get Geek Access"
+				}
+			},
+			{
+				"id": "my-personal-geek",
+				"slug": "my-personal-geek",
+				"status": "published",
+				"data": {
+					"name": "My Personal Geek",
+					"price": "$50/mo",
+					"description": "Everything in Geek Access plus in-home visits",
+					"features": ["Everything in Geek Access", "Monthly in-home visit", "Device setup & optimization", "Password management setup", "Family device support", "Priority phone line"],
+					"cta_text": "Get Personal Geek"
+				}
+			},
+			{
+				"id": "geek-pro",
+				"slug": "geek-pro",
+				"status": "published",
+				"data": {
+					"name": "Geek Pro",
+					"price": "$99/mo",
+					"description": "Full concierge tech service — your personal technology department",
+					"features": ["Everything in Personal Geek", "Unlimited in-home visits", "Smart home management", "Bill negotiation assistance", "Bank dispute letter writing", "New device selection & setup", "24/7 emergency support"],
+					"cta_text": "Get Geek Pro"
 				}
 			}
 		]

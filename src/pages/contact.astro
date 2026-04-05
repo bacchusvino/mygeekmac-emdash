@@ -1,357 +1,110 @@
 ---
-import { getEmDashEntry } from "emdash";
 import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
+const site = Astro.locals.site as "geekmac" | "geekpc";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "contact");
+const serviceOptions = site === "geekpc"
+	? [
+		{ value: "", label: "What do you need help with?" },
+		{ value: "help-now", label: "I need help right now" },
+		{ value: "geek-access", label: "Geek Access ($25/mo)" },
+		{ value: "personal-geek", label: "My Personal Geek ($50/mo)" },
+		{ value: "geek-pro", label: "Geek Pro ($99/mo)" },
+		{ value: "question", label: "I have a question" },
+	]
+	: [
+		{ value: "", label: "What brings you here?" },
+		{ value: "computer-help", label: "Computer Help (Mac or PC)" },
+		{ value: "ai-help", label: "AI Consulting / Automation" },
+		{ value: "coaching", label: "Coaching & Classes" },
+		{ value: "remote", label: "Remote Support" },
+		{ value: "other", label: "Something Else" },
+	];
 
-try {
-	Astro.cache.set(cacheHint);
-} catch {}
-
-// Handle form submission
-// NOTE: This is demo code. For production, add:
-// - CSRF token validation
-// - Rate limiting (e.g., via Cloudflare or middleware)
-// - Actual email sending or webhook integration
-let formStatus: "idle" | "success" | "error" = "idle";
-let formMessage = "";
-
-if (Astro.request.method === "POST") {
-	try {
-		const formData = await Astro.request.formData();
-		const name = formData.get("name")?.toString() || "";
-		const email = formData.get("email")?.toString() || "";
-		const company = formData.get("company")?.toString() || "";
-		const message = formData.get("message")?.toString() || "";
-
-		if (!name || !email || !message) {
-			formStatus = "error";
-			formMessage = "Please fill in all required fields.";
-		} else if (!email.includes("@")) {
-			formStatus = "error";
-			formMessage = "Please enter a valid email address.";
-		} else {
-			// TODO: Replace with actual email/webhook integration
-			console.log("Contact form submission:", {
-				name,
-				email,
-				company,
-				message,
-			});
-			formStatus = "success";
-			formMessage =
-				"Thanks for reaching out! We'll get back to you within 24 hours.";
-		}
-	} catch {
-		formStatus = "error";
-		formMessage = "Something went wrong. Please try again.";
-	}
-}
-
-const pageContent = page?.data.content;
+const locationOptions = site === "geekpc"
+	? ["Idyllwild", "Pine Cove", "San Diego", "Other SoCal", "Remote"]
+	: ["Idyllwild / Pine Cove", "Mountain Center / Anza", "Hemet / San Jacinto", "San Diego", "Remote (Nationwide)"];
 ---
 
-<Base
-	title="Contact"
-	description="Have questions? Want a demo? We'd love to hear from you."
->
-	{pageContent && <MarketingBlocks value={pageContent} />}
-
-	<section class="contact-form-section section">
+<Base title={`Contact | ${site === "geekpc" ? "Senior Tech Support" : "Tech Help"} in Idyllwild, CA`} description="Call (951) 468-5674 or send a message. Reply within 2 hours. Free 15-minute discovery call.">
+	<section class="page-header">
 		<div class="container">
-			<div class="contact-grid">
-				<div class="contact-info">
-					<h2>Talk to our team</h2>
-					<p>Fill out the form and we'll be in touch within 24 hours.</p>
+			<p class="section__eyebrow">Get In Touch</p>
+			<h1 class="page-header__title">Let's Talk About Your Tech Needs</h1>
+			<p class="page-header__desc">Free 15-minute discovery call. No sales pressure. No jargon.</p>
+		</div>
+	</section>
 
-					<div class="contact-methods">
-						<div class="contact-method">
-							<div class="contact-icon">
-								<i class="ph ph-envelope" aria-hidden="true"></i>
-							</div>
-							<div class="contact-method-content">
-								<h4>Email</h4>
-								<a href="mailto:hello@acme.example">hello@acme.example</a>
-							</div>
-						</div>
-						<div class="contact-method">
-							<div class="contact-icon">
-								<i class="ph ph-lifebuoy" aria-hidden="true"></i>
-							</div>
-							<div class="contact-method-content">
-								<h4>Support</h4>
-								<a href="mailto:support@acme.example">support@acme.example</a>
-							</div>
-						</div>
-						<div class="contact-method">
-							<div class="contact-icon">
-								<i class="ph ph-currency-dollar" aria-hidden="true"></i>
-							</div>
-							<div class="contact-method-content">
-								<h4>Sales</h4>
-								<a href="mailto:sales@acme.example">sales@acme.example</a>
-							</div>
-						</div>
+	<section>
+		<div class="container">
+			<div class="contact-section">
+				<div class="contact-info">
+					<div class="contact-method">
+						<p class="contact-method__label">Call or Text</p>
+						<p class="contact-method__value"><a href="tel:+19514685674">(951) 468-5674</a></p>
 					</div>
+					<div class="contact-method">
+						<p class="contact-method__label">Email</p>
+						<p class="contact-method__value"><a href="mailto:josh@mygeekmac.com">josh@mygeekmac.com</a></p>
+					</div>
+					<div class="contact-method">
+						<p class="contact-method__label">Response Time</p>
+						<p class="contact-method__value">Within 2 hours</p>
+						<p style="color:var(--warm-gray);margin-top:0.5rem;font-size:var(--text-sm);">I respond personally — no chatbots, no ticket systems.</p>
+					</div>
+					<div class="contact-method">
+						<p class="contact-method__label">Location</p>
+						<p class="contact-method__value">Idyllwild, California</p>
+					</div>
+					<div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--rule);">
+						<p style="font-weight:600;margin-bottom:0.5rem;">Service Area</p>
+						<p style="color:var(--warm-gray);font-size:var(--text-sm);"><strong>On-site:</strong> Idyllwild, Pine Cove, Mountain Center, Anza, Hemet, San Jacinto, San Diego</p>
+						<p style="color:var(--warm-gray);font-size:var(--text-sm);margin-top:0.5rem;"><strong>Remote:</strong> Available nationwide</p>
+					</div>
+					{site === "geekpc" && (
+						<div style="margin-top:1.5rem;">
+							<p style="color:var(--warm-gray);font-size:var(--text-sm);">PO Box 11, Idyllwild CA 92549</p>
+						</div>
+					)}
 				</div>
 
-				<div class="contact-form-wrapper">
-					{
-						formStatus === "success" ? (
-							<div class="form-success">
-								<div class="success-icon">✓</div>
-								<h3>Message Sent!</h3>
-								<p>{formMessage}</p>
-								<a href="/contact" class="btn btn-secondary">
-									Send another message
-								</a>
-							</div>
-						) : (
-							<form method="POST" class="contact-form">
-								{formStatus === "error" && (
-									<div class="form-error">
-										<p>{formMessage}</p>
-									</div>
-								)}
+				<div class="contact-form">
+					<h2 style="font-family:var(--font-display);font-size:1.375rem;margin-bottom:1.5rem;">Send a Message</h2>
+					<form method="POST" action="/api/contact">
+						<p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+						<input type="hidden" name="site" value={site} />
 
-								<div class="form-row">
-									<div class="form-field">
-										<label for="name">Name *</label>
-										<input
-											type="text"
-											id="name"
-											name="name"
-											required
-											placeholder="Your name"
-											autocomplete="name"
-										/>
-									</div>
-									<div class="form-field">
-										<label for="email">Email *</label>
-										<input
-											type="email"
-											id="email"
-											name="email"
-											required
-											placeholder="you@company.com"
-											autocomplete="email"
-										/>
-									</div>
-								</div>
+						<div class="form-group">
+							<label for="name" class="form-label">Your Name *</label>
+							<input type="text" id="name" name="name" class="form-input" required autocomplete="name" />
+						</div>
 
-								<div class="form-field">
-									<label for="company">Company</label>
-									<input
-										type="text"
-										id="company"
-										name="company"
-										placeholder="Your company"
-										autocomplete="organization"
-									/>
-								</div>
+						<div class="form-group">
+							<label for="phone" class="form-label">Phone Number *</label>
+							<input type="tel" id="phone" name="phone" class="form-input" required autocomplete="tel" />
+						</div>
 
-								<div class="form-field">
-									<label for="message">Message *</label>
-									<textarea
-										id="message"
-										name="message"
-										required
-										rows="5"
-										placeholder="Tell us about your project or question..."
-									/>
-								</div>
+						<div class="form-group">
+							<label for="email" class="form-label">Email Address</label>
+							<input type="email" id="email" name="email" class="form-input" autocomplete="email" />
+						</div>
 
-								<button type="submit" class="btn btn-primary btn-lg">
-									Send Message
-								</button>
-							</form>
-						)
-					}
+						<div class="form-group">
+							<label for="interest" class="form-label">{site === "geekpc" ? "What do you need?" : "What brings you here?"}</label>
+							<select id="interest" name="interest" class="form-select">
+								{serviceOptions.map((opt) => <option value={opt.value}>{opt.label}</option>)}
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="message" class="form-label">Tell me about your situation</label>
+							<textarea id="message" name="message" class="form-textarea" placeholder="What's going on with your technology?"></textarea>
+						</div>
+
+						<button type="submit" class="btn btn--primary" style="width:100%;">Send Message</button>
+						<p style="text-align:center;margin-top:1rem;color:var(--warm-gray);font-size:var(--text-xs);">I'll respond within 2 hours during business hours.</p>
+					</form>
 				</div>
 			</div>
 		</div>
 	</section>
 </Base>
-
-<style>
-	.contact-form-section {
-		padding-bottom: var(--spacing-5xl);
-	}
-
-	.contact-grid {
-		display: grid;
-		grid-template-columns: 1fr 1.5fr;
-		gap: var(--spacing-4xl);
-		align-items: start;
-	}
-
-	.contact-info h2 {
-		font-size: var(--font-size-2xl);
-		margin-bottom: var(--spacing-md);
-	}
-
-	.contact-info > p {
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-2xl);
-	}
-
-	.contact-methods {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-lg);
-	}
-
-	.contact-method {
-		display: flex;
-		align-items: center;
-		gap: var(--spacing-md);
-	}
-
-	.contact-icon {
-		width: 48px;
-		height: 48px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 1.25rem;
-		color: white;
-		background: linear-gradient(
-			135deg,
-			var(--color-primary),
-			var(--color-accent)
-		);
-		border-radius: var(--radius);
-		flex-shrink: 0;
-	}
-
-	.contact-method-content h4 {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
-		margin-bottom: var(--spacing-xs);
-	}
-
-	.contact-method-content a {
-		color: var(--color-primary);
-		font-size: var(--font-size-lg);
-	}
-
-	.contact-method-content a:hover {
-		text-decoration: underline;
-	}
-
-	.contact-form-wrapper {
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
-		padding: var(--spacing-2xl);
-	}
-
-	.contact-form {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-lg);
-	}
-
-	.form-row {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: var(--spacing-lg);
-	}
-
-	.form-field {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-sm);
-	}
-
-	.form-field label {
-		font-size: var(--font-size-sm);
-		font-weight: 500;
-	}
-
-	.form-field input,
-	.form-field textarea {
-		padding: var(--spacing-md);
-		font-family: inherit;
-		font-size: var(--font-size-base);
-		color: var(--color-text);
-		background: var(--color-bg);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-sm);
-		transition:
-			border-color var(--transition-fast),
-			box-shadow var(--transition-fast);
-	}
-
-	.form-field input:focus,
-	.form-field textarea:focus {
-		outline: none;
-		border-color: var(--color-primary);
-		box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-	}
-
-	.form-field input::placeholder,
-	.form-field textarea::placeholder {
-		color: var(--color-muted);
-	}
-
-	.form-field textarea {
-		resize: vertical;
-		min-height: 120px;
-	}
-
-	.form-error {
-		padding: var(--spacing-md);
-		background: rgba(239, 68, 68, 0.1);
-		border: 1px solid rgba(239, 68, 68, 0.3);
-		border-radius: var(--radius-sm);
-		color: #dc2626;
-		font-size: var(--font-size-sm);
-	}
-
-	@media (prefers-color-scheme: dark) {
-		.form-error {
-			color: #f87171;
-		}
-	}
-
-	.form-success {
-		text-align: center;
-		padding: var(--spacing-2xl);
-	}
-
-	.success-icon {
-		width: 64px;
-		height: 64px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 2rem;
-		color: white;
-		background: var(--color-success);
-		border-radius: var(--radius-full);
-		margin: 0 auto var(--spacing-lg);
-	}
-
-	.form-success h3 {
-		font-size: var(--font-size-xl);
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.form-success p {
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-xl);
-	}
-
-	@media (max-width: 768px) {
-		.contact-grid {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-2xl);
-		}
-
-		.form-row {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>

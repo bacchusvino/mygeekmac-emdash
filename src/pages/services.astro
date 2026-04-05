@@ -1,0 +1,123 @@
+---
+import Base from "../layouts/Base.astro";
+const site = Astro.locals.site as "geekmac" | "geekpc";
+const title = site === "geekpc"
+	? "Services | Senior Tech Support in Idyllwild & San Diego"
+	: "Services & Pricing | Computer Repair & AI Help in Idyllwild, CA";
+---
+
+<Base title={title} description={site === "geekpc" ? "Save money, stay safe, get unstuck. Senior-friendly tech support starting at $60/hr." : "Computer help, AI consulting, and tech coaching. Starting at $60/hr with senior discount. Idyllwild, Hemet, San Diego."}>
+	<section class="page-header">
+		<div class="container">
+			<p class="section__eyebrow">{site === "geekpc" ? "Senior Tech Support" : "Technology Services"}</p>
+			<h1 class="page-header__title">{site === "geekpc" ? "Tech Help That Saves You Money & Keeps You Safe" : "Computer Help, AI Consulting & Tech Coaching in Idyllwild"}</h1>
+			<p class="page-header__desc">Plain English. No jargon. Honest pricing.</p>
+		</div>
+	</section>
+
+	{site === "geekpc" ? (
+		<!-- MyGeekPC Services -->
+		<section id="save-money" class="service-tier">
+			<div class="container">
+				<div class="tier-header"><span class="tier-icon">💰</span><div><h2 class="tier-title">Save Money</h2><p class="tier-subtitle">Cut costs without cutting quality</p></div></div>
+				<div class="service-grid">
+					<div class="service-block"><h3 class="service-block__title">Life Alert → Apple Watch</h3><p style="color:var(--warm-gray)">Cancel your $50/mo Life Alert. An Apple Watch does fall detection, heart monitoring, and emergency SOS — for a one-time cost. I'll set it up and teach you how to use it.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Cut Your Cable Bill</h3><p style="color:var(--warm-gray)">Most people overpay by $50-100/month. I'll audit your bills and switch you to streaming options that cost a fraction of cable.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Free Security Cameras</h3><p style="color:var(--warm-gray)">No monthly fees. I set up cameras that record locally — your footage stays on your property, not in someone's cloud.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="stay-safe" class="service-tier section--alt">
+			<div class="container">
+				<div class="tier-header"><span class="tier-icon">🛡️</span><div><h2 class="tier-title">Stay Safe</h2><p class="tier-subtitle">Protection from scams and digital threats</p></div></div>
+				<div class="service-grid">
+					<div class="service-block"><h3 class="service-block__title">Scam Recognition Training</h3><p style="color:var(--warm-gray)">Learn the signs. I teach you exactly how scammers operate so you can spot them before they get your money.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Password & Account Security</h3><p style="color:var(--warm-gray)">Set up a password manager, enable two-factor authentication, and lock down your accounts properly.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Bank Dispute Letters</h3><p style="color:var(--warm-gray)">Got charged for something you didn't buy? I write the letters, make the calls, and fight on your behalf until it's resolved.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="get-unstuck" class="service-tier">
+			<div class="container">
+				<div class="tier-header"><span class="tier-icon">🔧</span><div><h2 class="tier-title">Get Unstuck</h2><p class="tier-subtitle">Fix the frustrating stuff</p></div></div>
+				<div class="service-grid">
+					<div class="service-block"><h3 class="service-block__title">Bluetooth & Connectivity</h3><p style="color:var(--warm-gray)">Hearing aids, speakers, printers — I make them all talk to each other.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Printer & TV Issues</h3><p style="color:var(--warm-gray)">Printers that won't print. TVs that won't connect. Remotes that make no sense. I fix it all.</p></div>
+					<div class="service-block"><h3 class="service-block__title">General Frustration Fixes</h3><p style="color:var(--warm-gray)">Computer slow? Phone acting weird? Email not working? Whatever's bugging you — I'll sort it out.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section--alt">
+			<div class="container" style="text-align:center;">
+				<h2 class="section__title">Pricing</h2>
+				<div class="price-options" style="max-width:600px;margin:0 auto var(--space-lg);">
+					<div class="price-option"><span class="price-label">Single Session</span><span class="price-value">$60/hr</span><span class="price-note">Senior discount applied</span></div>
+					<div class="price-option price-option--featured"><span class="price-label">Membership</span><span class="price-value">From $25/mo</span><span class="price-note"><a href="/membership">See all plans →</a></span></div>
+				</div>
+				<a href="/contact" class="btn btn--primary btn--large">Get Help Now</a>
+			</div>
+		</section>
+	) : (
+		<!-- MyGeekMac Services -->
+		<section id="computer-help" class="service-tier">
+			<div class="container">
+				<div class="tier-header"><span class="tier-icon">🖥️</span><div><h2 class="tier-title">Computer Help for Real People</h2><p class="tier-subtitle">Mac & PC Support</p></div></div>
+				<div class="service-grid">
+					<div class="service-block"><h3 class="service-block__title">Email & Accounts</h3><p style="color:var(--warm-gray)">Setup, recovery, organization. Hacked accounts restored and secured.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Device Troubleshooting</h3><p style="color:var(--warm-gray)">Slow computers, crashes, software issues. Mac and PC — I fix both.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Backups & Data Recovery</h3><p style="color:var(--warm-gray)">Set up automatic backups. Recover lost files. Never lose your photos or documents again.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Printers & Networking</h3><p style="color:var(--warm-gray)">Wi-Fi setup, printer configuration, Bluetooth connections. I make all your devices work together.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="ai-help" class="service-tier section--alt">
+			<div class="container">
+				<div class="tier-header"><span class="tier-icon">✨</span><div><h2 class="tier-title">AI for Everyday Life</h2><p class="tier-subtitle">Certified AI Generalist (AIG-17)</p></div></div>
+				<div class="tier-philosophy"><p>AI isn't just for big tech companies. I help normal people and small businesses use AI tools practically, safely, and effectively.</p></div>
+				<div class="service-grid">
+					<div class="service-block"><h3 class="service-block__title">AI Tools & Setup</h3><p style="color:var(--warm-gray)">ChatGPT, Claude, local AI models. I'll help you pick the right tools and learn to use them.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Workflow Automation</h3><p style="color:var(--warm-gray)">Save hours every week. Automate repetitive tasks for your business or personal life.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Privacy-First AI</h3><p style="color:var(--warm-gray)">Local AI that runs on your computer. Your data stays yours — never sent to the cloud.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="coaching" class="service-tier">
+			<div class="container">
+				<div class="tier-header"><span class="tier-icon">📚</span><div><h2 class="tier-title">Coaching & Classes</h2><p class="tier-subtitle">Patient, Step-by-Step Teaching</p></div></div>
+				<div class="service-grid">
+					<div class="service-block"><h3 class="service-block__title">One-on-One Coaching</h3><p style="color:var(--warm-gray)">Private sessions tailored to your specific goals. Learn at your own pace.</p></div>
+					<div class="service-block"><h3 class="service-block__title">Scam-Proofing Workshop</h3><p style="color:var(--warm-gray)">Learn to recognize and avoid digital scams. Available for groups and organizations.</p></div>
+					<div class="service-block"><h3 class="service-block__title">AI Demystified</h3><p style="color:var(--warm-gray)">What AI actually is, how to use it safely, and how to separate hype from genuine utility.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section--alt">
+			<div class="container">
+				<h2 class="section__title section__title--centered">Pricing</h2>
+				<div class="price-options" style="max-width:700px;margin:0 auto var(--space-lg);">
+					<div class="price-option"><span class="price-label">Single Session</span><span class="price-value">$60/hr</span><span class="price-note">Senior discount applied</span></div>
+					<div class="price-option price-option--featured"><span class="price-label">First Visit</span><span class="price-value">$120</span><span class="price-note">2-hour minimum</span></div>
+					<div class="price-option"><span class="price-label">Remote Support</span><span class="price-value">$60/hr</span><span class="price-note">Available nationwide</span></div>
+				</div>
+				<p class="text-center"><a href="/contact" class="btn btn--primary btn--large">Schedule a Consultation</a></p>
+			</div>
+		</section>
+	)}
+
+	<section class="cta-section">
+		<div class="container">
+			<div class="cta-content">
+				<h2 class="cta-title">Ready to Get Help?</h2>
+				<p class="cta-desc">Free 15-minute discovery call. No obligation.</p>
+				<a href="tel:+19514685674" class="cta-phone" style="display:block;margin-bottom:var(--space-md);">(951) 468-5674</a>
+				<a href="/contact" class="btn btn--primary btn--large">Contact Josh</a>
+			</div>
+		</div>
+	</section>
+</Base>

@@ -1,0 +1,86 @@
+---
+import Base from "../layouts/Base.astro";
+const site = Astro.locals.site as "geekmac" | "geekpc";
+// Redirect to services on geekmac — membership is geekpc only
+if (site === "geekmac") return Astro.redirect("/services");
+---
+
+<Base title="Membership Plans | Have Your Own Personal Geek" description="Monthly tech support plans starting at $25/mo. Unlimited remote support, in-home visits, concierge service. Idyllwild & San Diego.">
+	<section class="page-header">
+		<div class="container">
+			<p class="section__eyebrow">Have Your Own Personal Geek</p>
+			<h1 class="page-header__title">Monthly Tech Support Plans</h1>
+			<p class="page-header__desc">Pick your level. Cancel anytime. No contracts.</p>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<div class="membership-grid">
+				<div class="membership-card">
+					<h3 class="membership-card__name">Geek Access</h3>
+					<p class="membership-card__price">$25<span class="membership-card__period">/month</span></p>
+					<p class="membership-card__desc">Remote support & priority scheduling</p>
+					<ul class="membership-card__features">
+						<li>Unlimited remote support calls</li>
+						<li>Priority scheduling</li>
+						<li>Monthly device check-up</li>
+						<li>Scam alert notifications</li>
+						<li>Email support</li>
+					</ul>
+					<a href="/contact" class="btn btn--secondary" style="width:100%;">Get Geek Access</a>
+				</div>
+
+				<div class="membership-card membership-card--featured">
+					<h3 class="membership-card__name">My Personal Geek</h3>
+					<p class="membership-card__price">$50<span class="membership-card__period">/month</span></p>
+					<p class="membership-card__desc">Everything above + in-home visits</p>
+					<ul class="membership-card__features">
+						<li>Everything in Geek Access</li>
+						<li>Monthly in-home visit</li>
+						<li>Device setup & optimization</li>
+						<li>Password management setup</li>
+						<li>Family device support</li>
+						<li>Priority phone line</li>
+					</ul>
+					<a href="/contact" class="btn btn--primary" style="width:100%;">Most Popular — Get Started</a>
+				</div>
+
+				<div class="membership-card">
+					<h3 class="membership-card__name">Geek Pro</h3>
+					<p class="membership-card__price">$99<span class="membership-card__period">/month</span></p>
+					<p class="membership-card__desc">Full concierge tech service</p>
+					<ul class="membership-card__features">
+						<li>Everything in Personal Geek</li>
+						<li>Unlimited in-home visits</li>
+						<li>Smart home management</li>
+						<li>Bill negotiation assistance</li>
+						<li>Bank dispute letter writing</li>
+						<li>New device selection & setup</li>
+						<li>24/7 emergency support</li>
+					</ul>
+					<a href="/contact" class="btn btn--secondary" style="width:100%;">Get Geek Pro</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section--alt">
+		<div class="container" style="max-width:600px;text-align:center;">
+			<h2 class="section__title">Why Membership?</h2>
+			<p style="color:var(--warm-gray);margin-bottom:var(--space-md);">Think of it like having a mechanic on retainer — but for your technology. When something goes wrong (or you just have a question), you call Josh. No per-hour charges. No surprise bills.</p>
+			<p style="color:var(--warm-gray);margin-bottom:var(--space-md);">Members get priority scheduling, which means when something urgent comes up, you go to the front of the line.</p>
+		</div>
+	</section>
+
+	<section class="cta-section">
+		<div class="container">
+			<div class="cta-content">
+				<h2 class="cta-title">Questions About Membership?</h2>
+				<p class="cta-desc">Call Josh for a free consultation.</p>
+				<a href="tel:+19514685674" class="cta-phone" style="display:block;margin-bottom:var(--space-md);">(951) 468-5674</a>
+				<a href="/contact" class="btn btn--primary btn--large">Get Started</a>
+			</div>
+		</div>
+	</section>
+</Base>
