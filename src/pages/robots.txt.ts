@@ -37,7 +37,9 @@ Sitemap: ${origin}/sitemap.xml
 		status: 200,
 		headers: {
 			"Content-Type": "text/plain; charset=utf-8",
-			"Cache-Control": "public, max-age=3600",
+			// Don't let Cloudflare edge cache this file — we've had stale-cache pain with it.
+			"Cache-Control": "public, max-age=60, must-revalidate",
+			"CDN-Cache-Control": "no-store",
 		},
 	});
 };
